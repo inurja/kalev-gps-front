@@ -133,7 +133,7 @@ export default {
         vectorLayer
       ],
       view: new View({
-        projection: getProjection("EPSG:4326"),
+        //projection: getProjection("EPSG:4326"),
         center: this.tallinnCenter,// this.tallinnCenter3301, [59.4373947, 24.7467042], this.tallinnCenter,
         zoom: 8
       })
@@ -144,7 +144,7 @@ export default {
       this.geoJsonAsString = geoJson;
       console.log("geoJsonfetched in Map component", this.geoJsonAsString);
 
-      var features = new GeoJSON().readFeatures(this.geoJsonAsString);
+      var features = new GeoJSON({featureProjection: getProjection("EPSG:3857")}).readFeatures(this.geoJsonAsString);
       //Clear old features, true means no dispatching of removeFeature event, makes clearing faster
       this.vectorSource.clear(true);
       //Add new Features
